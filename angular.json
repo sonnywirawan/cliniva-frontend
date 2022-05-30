@@ -73,7 +73,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cliniva:build"
+            "browserTarget": "cliniva:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {

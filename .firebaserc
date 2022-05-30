@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "cliniva-frontend",
+    "cliniva-main": "cliniva-frontend"
+  },
+  "targets": {}
+}

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:4200",
+  apiUrl: "https://lucky-voice-0294.us-east1.kalix.app:443",
+  // apiUrl: "http://127.0.0.1:9000",
 };
 
 /*

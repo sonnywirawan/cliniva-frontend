@@ -13,11 +13,23 @@
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Username</mat-label>
-                  <input matInput formControlName="username" required>
+                  <mat-label>First Name</mat-label>
+                  <input matInput formControlName="firstName" required>
                   <mat-icon matSuffix>face</mat-icon>
-                  <mat-error *ngIf="authForm.get('username').hasError('required')">
-                    Username is required
+                  <mat-error *ngIf="authForm.get('firstName').hasError('required')">
+                    First Name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Last Name</mat-label>
+                  <input matInput formControlName="lastName" required>
+                  <mat-icon matSuffix>face</mat-icon>
+                  <mat-error *ngIf="authForm.get('lastName').hasError('required')">
+                    Last Name is required
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -68,7 +80,8 @@
               </div>
             </div>
             <div class="container-auth-form-btn">
-              <button mat-flat-button color="primary" class="auth-form-btn" [disabled]="!authForm.valid " type="submit">
+              <button mat-flat-button color="primary" [class.auth-spinner]="loading" [disabled]="loading"
+                class="auth-form-btn" [disabled]="!authForm.valid " type="submit">
                 Register
               </button>
             </div>

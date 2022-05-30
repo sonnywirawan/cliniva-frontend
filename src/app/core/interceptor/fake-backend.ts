@@ -21,7 +21,7 @@ const users: User[] = [
     firstName: "Sarah",
     lastName: "Smith",
     role: Role.Admin,
-    token: "admin-token",
+    accessToken: "admin-token",
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const users: User[] = [
     firstName: "Ashton",
     lastName: "Cox",
     role: Role.Doctor,
-    token: "doctor-token",
+    accessToken: "doctor-token",
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const users: User[] = [
     firstName: "Cara",
     lastName: "Stevens",
     role: Role.Patient,
-    token: "patient-token",
+    accessToken: "patient-token",
   },
 ];
 
@@ -68,7 +68,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // route functions
 
     function authenticate() {
-      const { username, password } = body;
+      const { username, password } = body;      
       const user = users.find(
         (x) => x.username === username && x.password === password
       );
@@ -82,7 +82,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         firstName: user.firstName,
         lastName: user.lastName,
         role: user.role,
-        token: user.token,
+        accessToken: user.accessToken,
       });
     }
 
@@ -92,7 +92,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       return of(new HttpResponse({ status: 200, body }));
     }
 
-    function error(message) {
+    function error(message) {      
       return throwError({ error: { message } });
     }
 
