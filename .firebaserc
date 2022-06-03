@@ -1,7 +1,10 @@
 {
   "projects": {
     "default": "cliniva-frontend",
-    "cliniva-main": "cliniva-frontend"
+    "cliniva-main": "cliniva-frontend",
+    "cliniva-frontend": "cliniva-frontend",
+    "cliniva-frontned": "cliniva-frontend",
+    "mishirin_dev": "mishirin-726d8"
   },
   "targets": {}
 }

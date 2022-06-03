@@ -66,19 +66,17 @@ export class SignupComponent extends UnsubscribeOnDestroyAdapter implements OnIn
               .subscribe(
                 (res) => {
                   if (res) {
-                    setTimeout(() => {
-                      const role = this.authService.currentUserValue.role;
-                      if (role === Role.All || role === Role.Admin || role == Role.None) {
-                        this.router.navigate(["/admin/dashboard/main"]);
-                      } else if (role === Role.Doctor) {
-                        this.router.navigate(["/doctor/dashboard"]);
-                      } else if (role === Role.Patient) {
-                        this.router.navigate(["/patient/dashboard"]);
-                      } else {
-                        this.router.navigate(["/authentication/signin"]);
-                      }
-                      this.loading = false;
-                    }, 1000);
+                    const role = this.authService.currentUserValue.role;
+                    if (role === Role.All || role === Role.Admin || role == Role.None) {
+                      this.router.navigate(["/admin/dashboard/main"]);
+                    } else if (role === Role.Doctor) {
+                      this.router.navigate(["/doctor/dashboard"]);
+                    } else if (role === Role.Patient) {
+                      this.router.navigate(["/patient/dashboard"]);
+                    } else {
+                      this.router.navigate(["/authentication/signin"]);
+                    }
+                    this.loading = false;
                   } else {
                     this.loading = false;
                     console.log('Invalid Login');
