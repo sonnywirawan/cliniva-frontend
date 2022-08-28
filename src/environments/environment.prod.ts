@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: "https://lucky-voice-0294.us-east1.kalix.app:443",
+  clinivaAuthUrl: "https://young-water-1218.us-east1.kalix.app:443",
+  clinivaAppointmentUrl: "https://lingering-forest-5081.us-east1.kalix.app:443",
 };

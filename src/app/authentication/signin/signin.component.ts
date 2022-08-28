@@ -62,7 +62,7 @@ export class SigninComponent
       //   password: this.f.password.value
       // }).catch(error => {
       //   console.log(error);
-      // })
+      // })      
       this.subs.sink = this.authService
         .login(this.f.email.value, this.f.password.value)
         .subscribe(
@@ -83,7 +83,7 @@ export class SigninComponent
               this.error = "Invalid Login";
             }
           },
-          (error) => {
+          (error) => {            
             this.error = error;
             this.submitted = false;
             this.loading = false;

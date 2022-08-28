@@ -44,20 +44,24 @@ export class FormDialogComponent {
     return this.formControl.hasError("required")
       ? "Required field"
       : this.formControl.hasError("email")
-      ? "Not a valid email"
-      : "";
+        ? "Not a valid email"
+        : "";
   }
   createContactForm(): FormGroup {
     return this.fb.group({
       id: [this.patient.id],
       img: [this.patient.img],
-      name: [this.patient.name],
+      firstName: [this.patient.firstName],
       gender: [this.patient.gender],
-      date: [this.patient.date],
-      bGroup: [this.patient.bGroup],
+      dateOfBirth: [this.patient.dateOfBirth],
+      // dateOfBirth: [
+      //   formatDate(this.patient.dateOfBirth, "dd-MM-yyyy", "en"),
+      //   [Validators.required],
+      // ]
+      bloodGroup: [this.patient.bloodGroup],
       mobile: [this.patient.mobile],
       address: [this.patient.address],
-      treatment: [this.patient.treatment],
+      sugger: [this.patient.sugger],
     });
   }
   submit() {

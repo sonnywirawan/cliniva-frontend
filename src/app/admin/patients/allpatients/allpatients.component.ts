@@ -25,15 +25,24 @@ export class AllpatientsComponent
 {
   displayedColumns = [
     "select",
-    "img",
-    "name",
+    "id",
+    // "email",
+    // "password",
+    "firstName",
+    // "last_name",
+    // "role",
     "gender",
-    "address",
     "mobile",
-    "date",
-    "bGroup",
-    "treatment",
-    "actions",
+    "dateOfBirth",
+    // "age",
+    // "marital_status",
+    "address",
+    "bloodGroup",
+    // "blood_pressure",
+    "sugger",
+    // "injury",
+    "img",
+    "actions"
   ];
   exampleDatabase: PatientService | null;
   dataSource: ExampleDataSource | null;
@@ -108,7 +117,7 @@ export class AllpatientsComponent
       if (result === 1) {
         // When using an edit things are little different, firstly we find record inside DataService by id
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.id === this.id
+          (x: any) => x.id === this.id
         );
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] =
@@ -139,7 +148,7 @@ export class AllpatientsComponent
     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.id === this.id
+          (x: any) => x.id === this.id
         );
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
@@ -242,20 +251,22 @@ export class ExampleDataSource extends DataSource<Patient> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getAllPatients();
+    this.exampleDatabase.getAllPatients().subscribe((data) => {
+      this.exampleDatabase.dataChange.next(data.patients)
+    });
     return merge(...displayDataChanges).pipe(
       map(() => {
-        // Filter data
+        // Filter data        
         this.filteredData = this.exampleDatabase.data
           .slice()
           .filter((patient: Patient) => {
             const searchStr = (
-              patient.name +
+              patient.firstName +
               patient.gender +
               patient.address +
-              patient.date +
-              patient.bGroup +
-              patient.treatment +
+              patient.dateOfBirth +
+              patient.bloodGroup +
+              patient.sugger +
               patient.mobile
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
@@ -285,14 +296,14 @@ export class ExampleDataSource extends DataSource<Patient> {
         case "id":
           [propertyA, propertyB] = [a.id, b.id];
           break;
-        case "name":
-          [propertyA, propertyB] = [a.name, b.name];
+        case "firstName":
+          [propertyA, propertyB] = [a.firstName, b.firstName];
           break;
         case "gender":
           [propertyA, propertyB] = [a.gender, b.gender];
           break;
-        case "date":
-          [propertyA, propertyB] = [a.date, b.date];
+        case "dateOfBirth":
+          [propertyA, propertyB] = [a.dateOfBirth, b.dateOfBirth];
           break;
         case "address":
           [propertyA, propertyB] = [a.address, b.address];

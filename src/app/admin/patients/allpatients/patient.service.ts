@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Patient } from "./patient.model";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
+import { environment } from "src/environments/environment";
 @Injectable()
 export class PatientService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = "assets/data/patient.json";
-  isTblLoading = true;
+  isTblLoading = false;
   dataChange: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;
@@ -20,17 +21,22 @@ export class PatientService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllPatients(): void {
-    this.subs.sink = this.httpClient.get<Patient[]>(this.API_URL).subscribe(
-      (data) => {
-        this.isTblLoading = false;
-        this.dataChange.next(data);
-      },
-      (error: HttpErrorResponse) => {
-        this.isTblLoading = false;
-        console.log(error.name + " " + error.message);
-      }
-    );
+  getAllPatients(): Observable<any> {
+    return this.httpClient.post<Patient[]>(`${environment.clinivaAuthUrl}/patients`, {
+      role: ""
+    })
+    // .subscribe(
+    //   (data) => {
+    //     this.isTblLoading = false;
+    //     console.log(data);
+        
+    //    this.dataChange.next(data);
+    //   },
+    //   (error: HttpErrorResponse) => {
+    //     this.isTblLoading = false;
+    //     console.log(error.name + " " + error.message);
+    //   }
+    // );
   }
   addPatient(patient: Patient): void {
     this.dialogData = patient;

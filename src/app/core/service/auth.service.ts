@@ -23,16 +23,15 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string) {    
     return this.http
-      .post<any>(`${environment.apiUrl}/login`, {
+      .post<any>(`${environment.clinivaAuthUrl}/login`, {
         email,
         password
       })
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          console.log(user);
           localStorage.setItem("currentUser", JSON.stringify(user));
           this.currentUserSubject.next(user);
           return user;

@@ -25,13 +25,13 @@ export class AlldoctorsComponent
   displayedColumns = [
     "select",
     "img",
-    "name",
+    "firstName",
     "department",
     "specialization",
     "degree",
     "mobile",
     "email",
-    "date",
+    "joiningDate",
     "actions",
   ];
   exampleDatabase: DoctorsService | null;
@@ -107,7 +107,7 @@ export class AlldoctorsComponent
       if (result === 1) {
         // When using an edit things are little different, firstly we find record inside DataService by id
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.id === this.id
+          (x: any) => x.id === this.id
         );
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] =
@@ -138,7 +138,7 @@ export class AlldoctorsComponent
     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.id === this.id
+          (x: any) => x.id === this.id
         );
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
@@ -242,7 +242,9 @@ export class ExampleDataSource extends DataSource<Doctors> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getAllDoctorss();
+    this.exampleDatabase.getAllDoctors().subscribe((data) => {
+      this.exampleDatabase.dataChange.next(data.doctors)
+    });
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
@@ -250,12 +252,13 @@ export class ExampleDataSource extends DataSource<Doctors> {
           .slice()
           .filter((doctors: Doctors) => {
             const searchStr = (
-              doctors.name +
+              doctors.firstName +
               doctors.department +
               doctors.specialization +
               doctors.degree +
               doctors.email +
-              doctors.mobile
+              doctors.mobile + 
+              doctors.joiningDate
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -284,20 +287,26 @@ export class ExampleDataSource extends DataSource<Doctors> {
         case "id":
           [propertyA, propertyB] = [a.id, b.id];
           break;
-        case "name":
-          [propertyA, propertyB] = [a.name, b.name];
+        case "firstName":
+          [propertyA, propertyB] = [a.firstName, b.firstName];
+          break;
+        case "department":
+          [propertyA, propertyB] = [a.department, b.department];
+          break;
+        case "specialization":
+          [propertyA, propertyB] = [a.specialization, b.specialization];
+          break;
+        case "degree":
+          [propertyA, propertyB] = [a.degree, b.degree];
+          break;
+        case "mobile":
+          [propertyA, propertyB] = [a.mobile, b.mobile];
           break;
         case "email":
           [propertyA, propertyB] = [a.email, b.email];
           break;
-        case "date":
-          [propertyA, propertyB] = [a.date, b.date];
-          break;
-        case "time":
-          [propertyA, propertyB] = [a.department, b.department];
-          break;
-        case "mobile":
-          [propertyA, propertyB] = [a.mobile, b.mobile];
+        case "joiningDate":
+          [propertyA, propertyB] = [a.joiningDate, b.joiningDate];
           break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

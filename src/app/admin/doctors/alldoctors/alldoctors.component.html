@@ -78,9 +78,9 @@
                       [src]="row.img" />
                   </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+                <ng-container matColumnDef="firstName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.firstName}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="department">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
@@ -102,9 +102,9 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
                   <mat-cell *matCellDef="let row"> {{row.email}}</mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="date">
+                <ng-container matColumnDef="joiningDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Joining Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.date | date: 'MM/dd/yyyy'}}</mat-cell>
+                  <mat-cell *matCellDef="let row"> {{row.joiningDate}}</mat-cell>
                 </ng-container>
                 <!-- actions -->
                 <ng-container matColumnDef="actions">

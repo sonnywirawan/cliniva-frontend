@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://lucky-voice-0294.us-east1.kalix.app:443",
-  // apiUrl: "http://127.0.0.1:9000",
+  clinivaAuthUrl: "https://young-water-1218.us-east1.kalix.app:443",
+  clinivaAppointmentUrl: "https://lingering-forest-5081.us-east1.kalix.app:443",
+  // clinivaAuthUrl: "http://127.0.0.1:9000",
+  // clinivaAppointmentUrl: "http://127.0.0.1:9001",
 };
 
 /*

@@ -78,9 +78,9 @@
                       [src]="row.img" />
                   </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+                <ng-container matColumnDef="firstName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.firstName}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="gender">
                   <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Gender
@@ -99,17 +99,17 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
                   <mat-cell *matCellDef="let row"> {{row.mobile}}</mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="date">
+                <ng-container matColumnDef="dateOfBirth">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Birth Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.date | date: 'MM/dd/yyyy'}}</mat-cell>
+                  <mat-cell *matCellDef="let row"> {{row.dateOfBirth | date: 'MM/dd/yyyy'}}</mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="bGroup">
+                <ng-container matColumnDef="bloodGroup">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Blood Group</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.bGroup}}</mat-cell>
+                  <mat-cell *matCellDef="let row"> {{row.bloodGroup}}</mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="treatment">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Treatment</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.treatment}}</mat-cell>
+                <ng-container matColumnDef="sugger">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Sugger</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.sugger}}</mat-cell>
                 </ng-container>
                 <!-- actions -->
                 <ng-container matColumnDef="actions">

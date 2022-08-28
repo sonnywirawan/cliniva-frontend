@@ -29,6 +29,7 @@ import { FormDialogComponent } from "./allpatients/dialog/form-dialog/form-dialo
 import { PatientService } from "./allpatients/patient.service";
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { SharedModule } from "./../../shared/shared.module";
+import { AuthService } from "src/app/core/service/auth.service";
 
 @NgModule({
   declarations: [
@@ -64,6 +65,6 @@ import { SharedModule } from "./../../shared/shared.module";
     ComponentsModule,
     SharedModule,
   ],
-  providers: [PatientService],
+  providers: [PatientService, AuthService],
 })
 export class PatientsModule {}

@@ -53,7 +53,7 @@ export class SignupComponent extends UnsubscribeOnDestroyAdapter implements OnIn
       var form_value = this.authForm.value;
       if (form_value.password == form_value.cpassword) {
         return this.http
-          .post<any>(`${environment.apiUrl}/register`, {
+          .post<any>(`${environment.clinivaAuthUrl}/register`, {
             img: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
             email: form_value.email,
             password: form_value.password,

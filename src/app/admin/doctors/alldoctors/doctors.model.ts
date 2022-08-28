@@ -1,25 +1,43 @@
 import { formatDate } from "@angular/common";
 export class Doctors {
-  id: number;
-  img: string;
-  name: string;
+  id: string;
   email: string;
-  date: string;
-  specialization: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  gender: string;
   mobile: string;
+  designation: string;
   department: string;
+  dateOfBirth: string;
+  age: number;
+  address: string;
+  education: string;
+  img: string;
+  specialization: string;
   degree: string;
+  joiningDate: string;
   constructor(doctors) {
     {
-      this.id = doctors.id || this.getRandomID();
-      this.img = doctors.avatar || "assets/images/user/user1.jpg";
-      this.name = doctors.name || "";
-      this.email = doctors.email || "";
-      this.date = formatDate(new Date(), "yyyy-MM-dd", "en") || "";
-      this.specialization = doctors.specialization || "";
-      this.mobile = doctors.mobile || "";
-      this.department = doctors.department || "";
-      this.degree = doctors.degree || "";
+      // this.id = doctors.id || this.getRandomID();
+      this.id = doctors.id;
+      this.email = doctors.email;
+      this.password = doctors.password;
+      this.firstName = doctors.firstName;
+      this.lastName = doctors.lastName;
+      this.role = doctors.role;
+      this.gender = doctors.gender;
+      this.mobile = doctors.mobile;
+      this.designation = doctors.designation;
+      this.dateOfBirth = doctors.dateOfBirth;
+      this.age = doctors.age;
+      this.address = doctors.address;
+      this.education = doctors.education;
+      this.specialization = doctors.specialization;
+      this.degree = doctors.degree;
+      this.joiningDate = doctors.joiningDate;
+      this.img = doctors.img || "assets/images/user/user1.jpg";
     }
   }
   public getRandomID(): string {
