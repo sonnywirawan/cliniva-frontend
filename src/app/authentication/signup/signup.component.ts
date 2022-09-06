@@ -54,11 +54,12 @@ export class SignupComponent extends UnsubscribeOnDestroyAdapter implements OnIn
       if (form_value.password == form_value.cpassword) {
         return this.http
           .post<any>(`${environment.clinivaAuthUrl}/register`, {
-            img: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+            // img: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
             email: form_value.email,
             password: form_value.password,
             firstName: form_value.firstName,
-            lastName: form_value.lastName
+            lastName: form_value.lastName,
+            role: ""
           }).subscribe(() => {
             // Hit API Login to Get Token
             this.subs.sink = this.authService

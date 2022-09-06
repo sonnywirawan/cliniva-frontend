@@ -1,0 +1,64 @@
+<form [formGroup]="formdata" (change)="applyChanges()">
+  <div class="row">
+    <!-- Age -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Age</mat-label>
+        <input disabled matInput formControlName="age" type="number" required>
+        <mat-error *ngIf="formdata.get('age').hasError('required')">
+          Age is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Marital Status -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Marital Status</mat-label>
+        <input disabled matInput formControlName="maritalStatus" required>
+        <mat-error *ngIf="formdata.get('maritalStatus').hasError('required')">
+          Marital Status is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Blood Group -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Blood Group</mat-label>
+        <input disabled matInput formControlName="bloodGroup" required>
+        <mat-error *ngIf="formdata.get('bloodGroup').hasError('required')">
+          Blood Group is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Blood Pressure -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Blood Pressure</mat-label>
+        <input disabled matInput formControlName="bloodPressure" required>
+        <mat-error *ngIf="formdata.get('bloodPressure').hasError('required')">
+          Blood Pressure is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Sugger -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Sugger</mat-label>
+        <input disabled matInput formControlName="sugger" required>
+        <mat-error *ngIf="formdata.get('sugger').hasError('required')">
+          Sugger is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Injury -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Injury</mat-label>
+        <input disabled matInput formControlName="injury" required>
+        <mat-error *ngIf="formdata.get('injury').hasError('required')">
+          Injury is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

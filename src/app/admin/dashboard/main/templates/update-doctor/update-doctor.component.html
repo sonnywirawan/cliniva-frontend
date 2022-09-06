@@ -1,0 +1,54 @@
+<form [formGroup]="formdata" (change)="applyChanges()">
+  <div class="row">
+    <!-- Designation -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Designation</mat-label>
+        <input disabled matInput formControlName="designation" required>
+        <mat-error *ngIf="formdata.get('designation').hasError('required')">
+          Designation is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Department -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Department</mat-label>
+        <input disabled matInput formControlName="department" required>
+        <mat-error *ngIf="formdata.get('department').hasError('required')">
+          Department is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Education -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Education</mat-label>
+        <input disabled matInput formControlName="education" required>
+        <mat-error *ngIf="formdata.get('education').hasError('required')">
+          Education is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Specialization -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Specialization</mat-label>
+        <input disabled matInput formControlName="specialization" required>
+        <mat-error *ngIf="formdata.get('specialization').hasError('required')">
+          Specialization is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Degree -->
+    <div class="col-6">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Degree</mat-label>
+        <input disabled matInput formControlName="degree" required>
+        <mat-error *ngIf="formdata.get('degree').hasError('required')">
+          Degree is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

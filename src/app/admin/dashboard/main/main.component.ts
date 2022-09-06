@@ -1,4 +1,8 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { environment } from "src/environments/environment";
+import * as moment from 'moment';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -51,14 +55,111 @@ export class MainComponent implements OnInit {
 
   public areaChartOptions: Partial<ChartOptions>;
   public barChartOptions: Partial<ChartOptions>;
-  constructor() {}
-  ngOnInit() {
+
+  formdata: FormGroup
+  constructor(private formbuilder: FormBuilder, private http: HttpClient) { }
+  ngOnInit() {    
     this.smallChart1();
     this.smallChart2();
     this.smallChart3();
     this.smallChart4();
     this.chart1();
     this.chart2();
+
+    this.formdata = this.formbuilder.group({
+      email: new FormControl("", [Validators.required, Validators.email, Validators.minLength(5)]),
+      firstName: new FormControl("", [Validators.required]),
+      lastName: new FormControl("", [Validators.required]),
+      role: new FormControl("", [Validators.required]),
+      gender: new FormControl("", [Validators.required]),
+      mobile: new FormControl("", [Validators.required]),
+      address: new FormControl("", [Validators.required]),
+      dateOfBirth: new FormControl("", [Validators.required]),
+      // Doctor
+      designation: new FormControl("", []),
+      department: new FormControl("", []),
+      education: new FormControl("", []),
+      specialization: new FormControl("", []),
+      degree: new FormControl("", []),
+      joiningDate: new FormControl(moment(new Date()).format("DD-MM-YYYY"), []),
+      // Patient
+      age: new FormControl(null, []),
+      maritalStatus: new FormControl("", []),
+      bloodGroup: new FormControl("", []),
+      bloodPressure: new FormControl("", []),
+      sugger: new FormControl("", []),
+      injury: new FormControl("", []),
+      // Less img
+    });
+
+    this.formdata.get('role').valueChanges.subscribe(role => {
+      if (role == 'doctor') {
+        // Enable Validator for Doctor
+        this.formdata.controls['designation'].setValidators([Validators.required]);
+        this.formdata.controls['department'].setValidators([Validators.required]);
+        this.formdata.controls['education'].setValidators([Validators.required]);
+        this.formdata.controls['specialization'].setValidators([Validators.required]);
+        this.formdata.controls['degree'].setValidators([Validators.required]);
+
+        // Disable Validator for Patient
+        this.formdata.controls['age'].clearValidators();
+        this.formdata.controls['maritalStatus'].clearValidators();
+        this.formdata.controls['bloodGroup'].clearValidators();
+        this.formdata.controls['bloodPressure'].clearValidators();
+        this.formdata.controls['sugger'].clearValidators();
+        this.formdata.controls['injury'].clearValidators();
+      } else if (role == 'patient') {
+        // Enable Validator for Patient
+        this.formdata.controls['age'].setValidators([Validators.required]);
+        this.formdata.controls['maritalStatus'].setValidators([Validators.required]);
+        this.formdata.controls['bloodGroup'].setValidators([Validators.required]);
+        this.formdata.controls['bloodPressure'].setValidators([Validators.required]);
+        this.formdata.controls['sugger'].setValidators([Validators.required]);
+        this.formdata.controls['injury'].setValidators([Validators.required]);
+
+        // Disable Validator for Doctor
+        this.formdata.controls['designation'].clearValidators();
+        this.formdata.controls['department'].clearValidators();
+        this.formdata.controls['education'].clearValidators();
+        this.formdata.controls['specialization'].clearValidators();
+        this.formdata.controls['degree'].clearValidators();
+      }
+    })
+  }
+
+  applyDoctorOrPatientValue(value) {
+    if (this.formdata.get('role').value == 'doctor') {
+      this.formdata.patchValue({
+        designation: value.designation,
+        department: value.department,
+        education: value.education,
+        specialization: value.specialization,
+        degree: value.degree,
+      })
+    } else if (this.formdata.get('role').value == 'patient') {
+      this.formdata.patchValue({
+        age: value.age,
+        maritalStatus: value.maritalStatus,
+        bloodGroup: value.bloodGroup,
+        bloodPressure: value.bloodPressure,
+        sugger: value.sugger,
+        injury: value.injury,
+      })
+    }
+  }
+
+  updateProfile() {    
+    var userId = 'd36c2dc9-2f92-4cab-b740-139ac8c3457f'
+    return this.http
+      .put<any>(`${environment.clinivaAuthUrl}/user/${userId}`, {
+        ...this.formdata.value,
+        dateOfBirth: moment(this.formdata.get('dateOfBirth').value).format('DD-MM-YYYY')
+      }).subscribe((result) => {
+        // Hit API Update User
+        console.log(result);
+      }, err => {
+        console.log('err', err);
+      })
   }
 
   private smallChart1() {
