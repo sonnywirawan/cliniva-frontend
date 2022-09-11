@@ -15,6 +15,7 @@ import { ComponentsModule } from "src/app/shared/components/components.module";
 import { SharedModule } from "src/app/shared/shared.module";
 import { UpdateDoctorComponent } from "./main/templates/update-doctor/update-doctor.component";
 import { UpdatePatientComponent } from "./main/templates/update-patient/update-patient.component";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [MainComponent, Dashboard2Component, UpdateDoctorComponent, UpdatePatientComponent],
@@ -31,6 +32,7 @@ import { UpdatePatientComponent } from "./main/templates/update-patient/update-p
     MatTooltipModule,
     ComponentsModule,
     SharedModule,
+    MatProgressSpinnerModule
   ],
 })
-export class DashboardModule {}
+export class DashboardModule { }

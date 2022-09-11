@@ -17,6 +17,9 @@ import {
   ApexFill,
   ApexResponsive,
 } from "ng-apexcharts";
+import { AuthService } from "src/app/core/service/auth.service";
+import { Router } from "@angular/router";
+import { Role } from "src/app/core/models/role";
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -57,8 +60,17 @@ export class MainComponent implements OnInit {
   public barChartOptions: Partial<ChartOptions>;
 
   formdata: FormGroup
-  constructor(private formbuilder: FormBuilder, private http: HttpClient) { }
-  ngOnInit() {    
+  userData: any
+  updateProfileLoading: boolean = false;
+
+  constructor(
+    private formbuilder: FormBuilder,
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
     this.smallChart1();
     this.smallChart2();
     this.smallChart3();
@@ -67,6 +79,7 @@ export class MainComponent implements OnInit {
     this.chart2();
 
     this.formdata = this.formbuilder.group({
+      id: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email, Validators.minLength(5)]),
       firstName: new FormControl("", [Validators.required]),
       lastName: new FormControl("", [Validators.required]),
@@ -92,14 +105,24 @@ export class MainComponent implements OnInit {
       // Less img
     });
 
+    this.authService.currentUser.subscribe((user: any) => {
+      this.userData = user
+      this.formdata.controls['id'].patchValue(user.id)
+      this.formdata.controls['email'].patchValue(user.email)
+      this.formdata.controls['firstName'].patchValue(user.firstName)
+      this.formdata.controls['lastName'].patchValue(user.lastName)
+    })
+
     this.formdata.get('role').valueChanges.subscribe(role => {
+      console.log(role);
+
       if (role == 'doctor') {
         // Enable Validator for Doctor
-        this.formdata.controls['designation'].setValidators([Validators.required]);
-        this.formdata.controls['department'].setValidators([Validators.required]);
-        this.formdata.controls['education'].setValidators([Validators.required]);
-        this.formdata.controls['specialization'].setValidators([Validators.required]);
-        this.formdata.controls['degree'].setValidators([Validators.required]);
+        this.formdata.controls['designation'] = new FormControl("", [Validators.required]);
+        this.formdata.controls['department'] = new FormControl("", [Validators.required]);
+        this.formdata.controls['education'] = new FormControl("", [Validators.required]);
+        this.formdata.controls['specialization'] = new FormControl("", [Validators.required]);
+        this.formdata.controls['degree'] = new FormControl("", [Validators.required]);
 
         // Disable Validator for Patient
         this.formdata.controls['age'].clearValidators();
@@ -110,12 +133,12 @@ export class MainComponent implements OnInit {
         this.formdata.controls['injury'].clearValidators();
       } else if (role == 'patient') {
         // Enable Validator for Patient
-        this.formdata.controls['age'].setValidators([Validators.required]);
-        this.formdata.controls['maritalStatus'].setValidators([Validators.required]);
-        this.formdata.controls['bloodGroup'].setValidators([Validators.required]);
-        this.formdata.controls['bloodPressure'].setValidators([Validators.required]);
-        this.formdata.controls['sugger'].setValidators([Validators.required]);
-        this.formdata.controls['injury'].setValidators([Validators.required]);
+        this.formdata.controls['age'] = new FormControl(null, [Validators.required]);
+        this.formdata.controls['maritalStatus'] = new FormControl("", [Validators.required]);
+        this.formdata.controls['bloodGroup'] = new FormControl("", [Validators.required]);
+        this.formdata.controls['bloodPressure'] = new FormControl("", [Validators.required]);
+        this.formdata.controls['sugger'] = new FormControl("", [Validators.required]);
+        this.formdata.controls['injury'] = new FormControl("", [Validators.required]);
 
         // Disable Validator for Doctor
         this.formdata.controls['designation'].clearValidators();
@@ -123,6 +146,7 @@ export class MainComponent implements OnInit {
         this.formdata.controls['education'].clearValidators();
         this.formdata.controls['specialization'].clearValidators();
         this.formdata.controls['degree'].clearValidators();
+        console.log(this.formdata);
       }
     })
   }
@@ -146,19 +170,36 @@ export class MainComponent implements OnInit {
         injury: value.injury,
       })
     }
+    console.log(this.formdata);
+
   }
 
-  updateProfile() {    
-    var userId = 'd36c2dc9-2f92-4cab-b740-139ac8c3457f'
+  updateProfile() {
+    this.updateProfileLoading = true;
     return this.http
-      .put<any>(`${environment.clinivaAuthUrl}/user/${userId}`, {
+      .put<any>(`${environment.clinivaAuthUrl}/user/${this.formdata.value.id}`, {
         ...this.formdata.value,
         dateOfBirth: moment(this.formdata.get('dateOfBirth').value).format('DD-MM-YYYY')
       }).subscribe((result) => {
         // Hit API Update User
-        console.log(result);
+        result.accessToken = this.userData.accessToken
+        localStorage.setItem("currentUser", JSON.stringify(result));
+        this.authService.currentUserSubject.next(result)
+
+        const role = result.role;
+        if (role === Role.All || role === Role.Admin || role == Role.None) {
+          this.router.navigate(["/admin/dashboard/main"]);
+        } else if (role === Role.Doctor) {
+          this.router.navigate(["/doctor/dashboard"]);
+        } else if (role === Role.Patient) {
+          this.router.navigate(["/patient/dashboard"]);
+        } else {
+          this.router.navigate(["/authentication/signin"]);
+        }
+        this.updateProfileLoading = false;
       }, err => {
         console.log('err', err);
+        this.updateProfileLoading = false;
       })
   }
 

@@ -69,6 +69,7 @@ export class SigninComponent
           (res) => {
             if (res) {
               const role = this.authService.currentUserValue.role;
+              
               if (role === Role.All || role === Role.Admin || role == Role.None) {
                 this.router.navigate(["/admin/dashboard/main"]);
               } else if (role === Role.Doctor) {

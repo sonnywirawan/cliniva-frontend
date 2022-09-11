@@ -106,11 +106,11 @@ export class HeaderComponent
     const userRole = this.authService.currentUserValue.role;
     this.userImg = this.authService.currentUserValue.img;
 
-    if (userRole === "Admin") {
+    if (userRole === "admin") {
       this.homePage = "admin/dashboard/main";
-    } else if (userRole === "Patient") {
+    } else if (userRole === "patient") {
       this.homePage = "patient/dashboard";
-    } else if (userRole === "Doctor") {
+    } else if (userRole === "doctor") {
       this.homePage = "doctor/dashboard";
     } else {
       this.homePage = "admin/dashboard/main";

@@ -71,7 +71,7 @@ export class UpdatePatientComponent implements OnInit {
 
   applyChanges() {
     if(this.formdata.valid) {
-      this.patientValue.emit(this.formdata);
+      this.patientValue.emit(this.formdata.value);
     }
   }
 }

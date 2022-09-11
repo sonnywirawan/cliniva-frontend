@@ -69,9 +69,7 @@ export class UpdateDoctorComponent implements OnInit {
     });
   }
 
-  applyChanges() {
-    console.log(this.formdata);
-    
+  applyChanges() {    
     if(this.formdata.valid) {
       this.doctorValue.emit(this.formdata.value);
     }
