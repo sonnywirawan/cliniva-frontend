@@ -7,6 +7,8 @@ import { environment } from "src/environments/environment";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
 import { Role } from "src/app/core/models/role";
 
+import { HttpHeaders } from '@angular/common/http';
+
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
@@ -52,6 +54,10 @@ export class SignupComponent extends UnsubscribeOnDestroyAdapter implements OnIn
       this.loading = true;
       var form_value = this.authForm.value;
       if (form_value.password == form_value.cpassword) {
+
+        const headers= new HttpHeaders()
+        .set('Access-Control-Allow-Origin', '*');
+        console.log('test', headers)
         return this.http
           .post<any>(`${environment.clinivaAuthUrl}/register`, {
             // img: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
@@ -60,7 +66,7 @@ export class SignupComponent extends UnsubscribeOnDestroyAdapter implements OnIn
             firstName: form_value.firstName,
             lastName: form_value.lastName,
             role: ""
-          }).subscribe(() => {
+          }, { 'headers': headers }).subscribe(() => {
             // Hit API Login to Get Token
             this.subs.sink = this.authService
               .login(form_value.email, form_value.password)

@@ -174,8 +174,13 @@ export class MainComponent implements OnInit {
 
   }
 
+<<<<<<< HEAD
   updateProfile() {
     this.updateProfileLoading = true;
+=======
+  updateProfile() {    
+    var userId = '9ff7c6cd-85ae-41cf-8d88-fb9308688ffc'
+>>>>>>> b2addb4 (newpull)
     return this.http
       .put<any>(`${environment.clinivaAuthUrl}/user/${this.formdata.value.id}`, {
         ...this.formdata.value,
