@@ -4,17 +4,10 @@
 
 export const environment = {
   production: false,
-<<<<<<< HEAD
-  clinivaAuthUrl: "https://soft-mode-7866.us-east1.kalix.app:443",
-  clinivaAppointmentUrl: "https://summer-wave-0004.us-east1.kalix.app:443",
-  // clinivaAuthUrl: "http://127.0.0.1:9000",
-  // clinivaAppointmentUrl: "http://127.0.0.1:9001",
-=======
   // clinivaAuthUrl: "https://young-water-1218.us-east1.kalix.app:443",
   // clinivaAppointmentUrl: "https://lingering-forest-5081.us-east1.kalix.app:443",
   clinivaAuthUrl: "http://127.0.0.1:9000",
   clinivaAppointmentUrl: "http://127.0.0.1:9001",
->>>>>>> b2addb4 (newpull)
 };
 
 /*

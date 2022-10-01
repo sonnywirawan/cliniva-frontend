@@ -13,12 +13,15 @@ import { MatSelectModule } from "@angular/material/select";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { SharedModule } from "src/app/shared/shared.module";
-import { UpdateDoctorComponent } from "./main/templates/update-doctor/update-doctor.component";
-import { UpdatePatientComponent } from "./main/templates/update-patient/update-patient.component";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { UpdateDialogComponent } from "./update-dialog/update-dialog.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UpdateDoctorComponent } from "./update-dialog/templates/update-doctor/update-doctor.component";
+import { UpdatePatientComponent } from "./update-dialog/templates/update-patient/update-patient.component";
 
 @NgModule({
-  declarations: [MainComponent, Dashboard2Component, UpdateDoctorComponent, UpdatePatientComponent],
+  declarations: [MainComponent, Dashboard2Component, UpdateDialogComponent,
+  UpdateDoctorComponent, UpdatePatientComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -32,7 +35,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTooltipModule,
     ComponentsModule,
     SharedModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule, ReactiveFormsModule 
+    
   ],
 })
 export class DashboardModule { }

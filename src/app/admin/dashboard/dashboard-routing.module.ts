@@ -5,6 +5,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { MainComponent } from "./main/main.component";
 import { Dashboard2Component } from "./dashboard2/dashboard2.component";
+import { MatDialogModule } from "@angular/material/dialog";
 const routes: Routes = [
   {
     path: "",
@@ -30,7 +31,9 @@ const routes: Routes = [
   { path: "**", component: Page404Component },
 ];
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes), 
+    MatDialogModule],
   exports: [RouterModule],
 })
 export class DashboardRoutingModule {}
